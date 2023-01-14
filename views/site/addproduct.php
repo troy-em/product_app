@@ -5,6 +5,9 @@
 //     exit();
 // }
 ?>
+
+<h2>Hi <?= Yii::$app->user->identity->user_name ?>,</h2>
+<h2><?= Yii::$app->user->identity->password ?></h2>
 <form action="add_product.php" method="post">
     <label for="product_name">Product Name:</label>
     <input type="text" id="product_name" name="product_name" required>
@@ -27,5 +30,5 @@
     <label for="active">Active:</label>
     <input type="checkbox" id="active" name="active" value="1">
     <br>
-    <input type="submit" value="Add Product">
+    <input type="submit" value="Add Product" class="p-btn btn-primary btn">
 </form>
