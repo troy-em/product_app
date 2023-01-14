@@ -42,7 +42,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             !Yii::$app->user->isGuest ?
                 [
                     'label' => 'Add Product',
-                    'url' => ['controller/action'],
+                    'url' => ['/site/addproduct'],
                     'linkOptions' => ['class' => 'nav-link btn btn-primary p-btn']
                 ] : '',
             Yii::$app->user->isGuest
