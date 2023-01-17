@@ -44,13 +44,17 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     'label' => 'Add Product',
                     'url' => ['/site/addproduct'],
                     'linkOptions' => ['class' => 'nav-link btn btn-primary p-btn']
-                ] : '',
+                ] : [
+                    'label' => 'Register',
+                    'url' => ['/site/register'],
+                    'linkOptions' => ['class' => 'nav-link btn btn-primary p-btn']
+                ],
             Yii::$app->user->isGuest
-                ? ['label' => 'Login', 'url' => ['/site/login']]
+                ? ['label' => 'Login', 'url' => ['/site/login'], 'linkOptions' => ['class' => 'nav-link btn btn-secondary p-btn']]
                 : '<li class="nav-item">'
                     . Html::beginForm(['/site/logout'])
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->user_name . ')',
+                        'Logout (' . Yii::$app->user->identity->user . ')',
                         ['class' => 'nav-link btn btn-link logout']
                     )
                     . Html::endForm()
@@ -75,7 +79,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <div class="container">
         <div class="row text-muted">
             <div class="col-md-6 text-center text-md-start">&copy; My Company <?= date('Y') ?></div>
-            <div class="col-md-6 text-center text-md-end"><?= Yii::powered() ?></div>
+            <!-- <div class="col-md-6 text-center text-md-end"><?= Yii::powered() ?></div> -->
         </div>
     </div>
 </footer>

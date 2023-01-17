@@ -3,21 +3,22 @@
 namespace app\models;
 
 use Yii;
-use yii\base\NotSupportedException;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "users".
  *
  * @property int $id
- * @property int $user_id
- * @property string $first_name
- * @property string $last_name
- * @property string $user_name
+ * @property string $username
+ * @property string $email
  * @property string $password
- * @property string $auth_key
- * @property string $date_created
+ * @property string|null $created_at
+ * @property string|null $updated_at
+ *
+
  */
-class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+class User extends ActiveRecord implements IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -33,12 +34,11 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['user_id', 'first_name', 'last_name', 'user_name', 'password', 'auth_key'], 'required'],
-            [['user_id'], 'integer'],
-            [['date_created'], 'safe'],
-            [['first_name', 'last_name'], 'string', 'max' => 100],
-            [['user_name', 'auth_key'], 'string', 'max' => 255],
-            [['password'], 'string', 'max' => 50],
+            [['username', 'email', 'password', ], 'required'],
+            ['email', 'email'],
+            ['email', 'unique'],
+            [['created_at', 'updated_at'], 'safe'],
+            [['username', 'email', 'password'], 'string', 'max' => 100],
         ];
     }
 
@@ -48,47 +48,36 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'first_name' => Yii::t('app', 'First Name'),
-            'last_name' => Yii::t('app', 'Last Name'),
-            'user_name' => Yii::t('app', 'User Name'),
-            'password' => Yii::t('app', 'Password'),
-            'auth_key' => Yii::t('app', 'Auth Key'),
-            'date_created' => Yii::t('app', 'Date Created'),
+            'id' => 'ID',
+            'username' => 'Username',
+            'email' => 'Email',
+            'password' => 'Password',
         ];
+    }
+
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return static::findOne(['access_token' => $token]);
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getAuthKey()
     {
         return $this->auth_key;
     }
-    public function getId()
-    {
-        return $this->id;
-    }
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-       throw new \yii\base\NotSupportedException();
-    }
-
-    public static function findIdentity($id)
-    {
-        return self::findOne($id);
-    }
-
-    public static function findByUsername($user_name){
-        return self::findOne(['user_name'=>$user_name]);
-    }
 
     public function validateAuthKey($auth_key)
     {
         return $this->auth_key === $auth_key;
-    }
-
-    public function validatePassword($password)
-    {
-        return $this->password === $password;
     }
 
 }
