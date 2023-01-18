@@ -10,6 +10,7 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 
+
 AppAsset::register($this);
 
 $this->registerCsrfMetaTags();
@@ -31,6 +32,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <header id="header">
     <?php
+    // Yii::$app->homeUrl = 'products';
     NavBar::begin([
         'brandLabel' => Html::img('@web/images/company1.png', ['alt'=>Yii::$app->name]),
         'brandUrl' => Yii::$app->homeUrl,
@@ -41,9 +43,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'items' => [
             !Yii::$app->user->isGuest ?
                 [
-                    'label' => 'Add Product',
-                    'url' => ['/site/addproduct'],
-                    'linkOptions' => ['class' => 'nav-link btn btn-primary p-btn']
+                    'label' => 'Manage Products',
+                    'url' => ['/products'],
+                    'linkOptions' => ['class' => 'nav-link']
                 ] : [
                     'label' => 'Register',
                     'url' => ['/site/register'],

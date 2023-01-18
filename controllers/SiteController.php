@@ -10,8 +10,6 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
-use app\models\ProductForm;
-use yii\web\UploadedFile;
 
 
 class SiteController extends Controller
@@ -162,42 +160,30 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionAddproduct()
+    public function actionPstatus()
     {
-        if (Yii::$app->user->isGuest) {
-            return $this->actionLogin();
-        }
-        return $this->render('addproduct');
+        return $this->render('pstatus');
     }
 
+    // public function actionAddproduct()
+    // {
+    //     if (Yii::$app->user->isGuest) {
+    //         return $this->actionLogin();
+    //     }
+    //     return $this->render('addproduct');
+    // }
 
-    public function actionPostProduct()
+
+
+    /**
+     * generate code input from a combination of product name and create date
+     * @param string $productName
+     * @param int $createDate
+     * @return string
+     */
+    private function generateCode($productName, $createDate)
     {
-        $model = new ProductForm();
-
-        if ($model->load(Yii::$app->request->post())) {
-            // assign user_id from session
-            $model->user_id = Yii::$app->user->id;
-            // assign created_at and updated_at
-            $model->created_at = time();
-            $model->updated_at = time();
-            if ($model->validate()) {
-                // create object of UploadedFile
-                $model->product_images = UploadedFile::getInstances($model, 'product_images');
-                // check if image is uploaded
-                if ($model->product_images && $model->validate()) {
-                    // upload the image
-                    foreach ($model->product_images as $file) {
-                        $file->saveAs('path/to/upload/' . $file->baseName . '.' . $file->extension);
-                    }
-                }
-                $model->save();
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        }
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-}
+        return substr($productName, 0, 3) . '-' . date('ymd', $createDate) . '-' . rand(1000, 9999);
+    }
 
 }

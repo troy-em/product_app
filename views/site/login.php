@@ -58,9 +58,7 @@ $this->title = 'Login';
         <p style='text-align:center;'>Don't Have an Account? <span><a href="<?= \yii\helpers\Url::to(['/site/register']) ?>">Sign Up</a></span></p>
 
         <div style="display:flex; justify-content: center;"class="form-group">
-            
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary userbutton', 'name' => 'login-button']) ?>
-            
         </div>
 
     <?php ActiveForm::end(); ?>
