@@ -9,6 +9,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\User;
+
 
 class SiteController extends Controller
 {
@@ -72,7 +74,7 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->goBack();
         }
 
         $model = new LoginForm();
@@ -116,6 +118,38 @@ class SiteController extends Controller
         ]);
     }
 
+
+
+    public function actionRegister()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goBack();
+        }
+        return $this->render('register');
+    }
+
+    public function actionSignUp()
+    {
+        $request = Yii::$app->request->post();
+
+        $user = new User();
+        $user->attributes = $request;
+        $user->password = Yii::$app->getSecurity()->generatePasswordHash($user->password);//Hash password before storing to DB
+        $session = Yii::$app->session;
+
+        if($user->validate() && $user->save())
+        {
+            $session->setFlash('successMessage', 'Registration successful');
+            return $this->redirect(['site/login']);
+        }
+
+        $session->setFlash('errorMessages', $user->getErrors());
+        return $this->redirect(['site/register']);
+    }
+
+
+
+
     /**
      * Displays about page.
      *
@@ -126,8 +160,30 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionAddproduct()
+    public function actionPstatus()
     {
-        return $this->render('addproduct');
+        return $this->render('pstatus');
     }
+
+    // public function actionAddproduct()
+    // {
+    //     if (Yii::$app->user->isGuest) {
+    //         return $this->actionLogin();
+    //     }
+    //     return $this->render('addproduct');
+    // }
+
+
+
+    /**
+     * generate code input from a combination of product name and create date
+     * @param string $productName
+     * @param int $createDate
+     * @return string
+     */
+    private function generateCode($productName, $createDate)
+    {
+        return substr($productName, 0, 3) . '-' . date('ymd', $createDate) . '-' . rand(1000, 9999);
+    }
+
 }

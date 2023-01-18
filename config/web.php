@@ -47,7 +47,6 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'addproduct' => 'addproduct/index'
             ],
         ],
     ],

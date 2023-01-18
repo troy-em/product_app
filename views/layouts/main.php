@@ -10,6 +10,7 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 
+
 AppAsset::register($this);
 
 $this->registerCsrfMetaTags();
@@ -31,6 +32,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <header id="header">
     <?php
+    // Yii::$app->homeUrl = 'products';
     NavBar::begin([
         'brandLabel' => Html::img('@web/images/company1.png', ['alt'=>Yii::$app->name]),
         'brandUrl' => Yii::$app->homeUrl,
@@ -41,16 +43,20 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'items' => [
             !Yii::$app->user->isGuest ?
                 [
-                    'label' => 'Add Product',
-                    'url' => ['/site/addproduct'],
+                    'label' => 'Manage Products',
+                    'url' => ['/products'],
+                    'linkOptions' => ['class' => 'nav-link']
+                ] : [
+                    'label' => 'Register',
+                    'url' => ['/site/register'],
                     'linkOptions' => ['class' => 'nav-link btn btn-primary p-btn']
-                ] : '',
+                ],
             Yii::$app->user->isGuest
-                ? ['label' => 'Login', 'url' => ['/site/login']]
+                ? ['label' => 'Login', 'url' => ['/site/login'], 'linkOptions' => ['class' => 'nav-link btn btn-secondary p-btn']]
                 : '<li class="nav-item">'
                     . Html::beginForm(['/site/logout'])
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        'Logout (' . Yii::$app->user->identity->user . ')',
                         ['class' => 'nav-link btn btn-link logout']
                     )
                     . Html::endForm()
@@ -75,7 +81,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <div class="container">
         <div class="row text-muted">
             <div class="col-md-6 text-center text-md-start">&copy; My Company <?= date('Y') ?></div>
-            <div class="col-md-6 text-center text-md-end"><?= Yii::powered() ?></div>
+            <!-- <div class="col-md-6 text-center text-md-end"><?= Yii::powered() ?></div> -->
         </div>
     </div>
 </footer>
