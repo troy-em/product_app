@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
+use app\models\Products;
 
 
 class SiteController extends Controller
@@ -63,7 +64,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $products = Products::find()->where(['active'=>1])->all();
+        return $this->render('index',['products'=>$products]);
     }
 
     /**

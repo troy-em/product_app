@@ -7,11 +7,47 @@ $this->title = 'My Yii Application';
 <div class="site-index">
 
     <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Congratulations!</h1>
+        <h1 class="display-4">SNEAKERZ</h1>
 
-        <p class="lead">Products Will Appear Here Soon!</p>
+        <p class="lead">Check Out Our Products</p>
 
         <!-- <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p> -->
+    </div>
+    <div class="col-sm-9 padding-right">
+        <div class="features_items">
+            <h2 class="title  text-center">Featured Items</h2>
+            <?php
+             foreach($products as $product) {
+            ?>
+            <div class="col-sm-4">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <img src="" alt="">
+                            <h2>$ <?= $product->selling_price?></h2>
+                            <p><?= $product->name?></p>
+                            <a href="http://" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        </div>
+                        <div class="product-overlay">
+                            <div class="overlay-content">
+                                <h2>$ <?= $product->selling_price?></h2>
+                                <p><?= $product->name?><br><?= $product->description?></p>
+                                <a href="http://" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="choose">
+
+                    </div>
+
+                </div>
+            </div>
+            <?php
+             }
+            ?>
+        </div>
+
     </div>
 <!--
     <div class="body-content">
