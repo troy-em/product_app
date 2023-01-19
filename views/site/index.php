@@ -2,7 +2,8 @@
 
 /** @var yii\web\View $this */
 
-$this->title = 'My Yii Application';
+$this->title = 'Sneakerz';
+use yii\bootstrap5\Html;
 ?>
 <div class="site-index">
 
@@ -23,7 +24,7 @@ $this->title = 'My Yii Application';
                 <div class="product-image-wrapper">
                     <div class="single-products">
                         <div class="productinfo text-center">
-                            <img src="" alt="">
+                        <?= Html::img("uploads/{$product->image}", ['alt' => $product->name]) ?>
                             <h2>$ <?= $product->selling_price?></h2>
                             <p><?= $product->name?></p>
                             <a href="http://" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -31,7 +32,7 @@ $this->title = 'My Yii Application';
                         <div class="product-overlay">
                             <div class="overlay-content">
                                 <h2>$ <?= $product->selling_price?></h2>
-                                <p><?= $product->name?><br><?= $product->description?></p>
+                                <p><span style="font-size:18px;font-weight: 800; color: #FDD771;"><?= $product->name?></span><br><?= $product->description?></p>
                                 <a href="http://" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                             </div>
 
