@@ -831,6 +831,10 @@ h2.title:before{
 
 .features_items{
 	overflow:hidden;
+  display: flex;
+  justify-content: center;
+  padding: 2em;
+  
 }
 
 
