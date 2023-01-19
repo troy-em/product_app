@@ -98,6 +98,22 @@ a.desc:after {
     width: 8em;
 }
 
+.r-btn {
+    border-radius: 20px;
+    padding: 6px;
+    margin-right: 1em;
+    width: 8em;
+    background-color: #24a0ed;
+}
+
+.r-btn:hover{
+    border-radius: 20px;
+    padding: 6px;
+    margin-right: 1em;
+    width: 8em;
+    background-color: #24a0ed6b;
+}
+
 .add-button {
     border-radius: 20px;
     padding: 6px;
