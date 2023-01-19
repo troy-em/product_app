@@ -60,6 +60,9 @@ class ProductsController extends Controller
      */
     public function actionView($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/login']);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -72,6 +75,10 @@ class ProductsController extends Controller
      */
     public function actionCreate()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/login']);
+        }
+
         $model = new Products();
 
         if ($this->request->isPost) {
@@ -106,6 +113,10 @@ class ProductsController extends Controller
      */
     public function actionUpdate($id)
     {
+
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/login']);
+        }
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -126,6 +137,10 @@ class ProductsController extends Controller
      */
     public function actionDelete($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/login']);
+        }
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
