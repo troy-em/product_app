@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?> <br>
 
-    <?= $form->field($model, 'amount')->textInput(['maxlength' => true]) ?>
+    <!-- <?= $form->field($model, 'amount')->textInput(['maxlength' => true]) ?> -->
 
     <?= $form->field($model, 'unit_price')->textInput() ?>
 
