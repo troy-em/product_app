@@ -21,7 +21,7 @@ use Yii;
  * @property int $stock
  * @property string $image
  * @property string $created_at
- * @property string $amount
+ * @property string $category
  */
 class Products extends \yii\db\ActiveRecord
 {
@@ -39,12 +39,12 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'ikey', 'unit_price', 'selling_price', 'availability', 'active', 'brand', 'stock', 'image', 'amount'], 'required'],
+            [['name', 'description', 'ikey', 'unit_price', 'selling_price', 'availability', 'active', 'brand', 'stock', 'image', 'category'], 'required'],
             [['description'], 'string'],
-            [['unit_price', 'selling_price', 'quantity', 'active', 'stock'], 'integer'],
+            [['unit_price', 'selling_price', 'quantity', 'stock'], 'integer'],
             [['user_email', 'created_at'], 'safe'],
             [['user_email', 'name', 'image'], 'string', 'max' => 255],
-            [['ikey', 'amount'], 'string', 'max' => 50],
+            [['ikey', 'category'], 'string', 'max' => 50],
             [['availability', 'brand'], 'string', 'max' => 100],
             [['image'], 'file', 'extensions'=>'jpg,png,gif', 'skipOnEmpty'=>false]
         ];
@@ -70,7 +70,32 @@ class Products extends \yii\db\ActiveRecord
             'stock' => Yii::t('app', 'Stock'),
             'image' => Yii::t('app', 'Image'),
             'created_at' => Yii::t('app', 'Created At'),
-            'amount' => Yii::t('app', 'Amount'),
+            'category' => Yii::t('app', 'Category'),
+        ];
+    }
+
+    public function getCategories()
+    {
+        return [
+            'Men' => 'Men',
+            'Women' => 'Women',
+            'Unisex' => 'Unisex',
+        ];
+    }
+
+    public function getAvailability()
+    {
+        return [
+            'In Stock' => 'In Stock',
+            'Out of Stock' => 'Out of Stock',
+        ];
+    }
+
+    public function getStatus()
+    {
+        return [
+            'Active' => 'Active',
+            'Inactive' => 'Inactive',
         ];
     }
 }

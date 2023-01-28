@@ -64,7 +64,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $products = Products::find()->where(['active'=>1])->all();
+        $products = Products::find()->where(['active'=>'Active'])->all();
         return $this->render('index',['products'=>$products]);
     }
 

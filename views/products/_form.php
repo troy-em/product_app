@@ -16,11 +16,13 @@ use yii\widgets\ActiveForm;
     <h1><?= Html::encode($this->title) ?></h1>
     <hr>
     <br>
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?><br>
+
+    <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?><br>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?> <br>
 
-    <!-- <?= $form->field($model, 'amount')->textInput(['maxlength' => true]) ?> -->
+    <?= $form->field($model, 'category')->dropDownList($model->getCategories()) ?> <br>
 
     <?= $form->field($model, 'unit_price')->textInput() ?>
 
@@ -28,15 +30,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'quantity')->textInput() ?>
 
-    <?= $form->field($model, 'availability')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'availability')->dropDownList($model->getAvailability()) ?>
 
-    <?= $form->field($model, 'active')->dropDownList([1=>'Active', 0=>'Inactive']) ?>
-
-    <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'active')->dropDownList($model->getStatus()) ?><br>
 
     <?= $form->field($model, 'stock')->textInput() ?>
 
-    <?= $form->field($model, 'image')->fileInput() ?> <br>
+    <?= $form->field($model, 'image')->fileInput() ?>
 
 
     <div class="form-group">

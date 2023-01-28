@@ -43,7 +43,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'created_at') ?>
 
-    <?php // echo $form->field($model, 'amount') ?>
+    <?php // echo $form->field($model, 'category') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

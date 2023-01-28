@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'description:ntext',
             'ikey',
+            'category',
             'unit_price',
             'selling_price',
             'quantity',
@@ -43,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'stock',
             'image',
             'created_at',
-            'amount',
         ],
     ]) ?>
 
